@@ -11,6 +11,7 @@ div{
    width: 70%;
    height: 90%;
    float: right;
+   padding: 10Px;
    
 }
 
@@ -27,7 +28,7 @@ div{
 
 .sections {
 	width: 95%;
-	height: 200px;
+	/*height: 200px;*/
 	padding: 10Px;
 	background: #eeeeee;
 	margin-left: auto;
@@ -38,7 +39,7 @@ div{
 
 .questions{
 	width: 95%;
-	height: 100px;
+	/*height: 100px;*/
 	padding: 10px;
 	background: #cccccc;
 
