@@ -26,28 +26,24 @@ function make_question(id_num){
 	question.innerHTML = "<h3>Question Name<h3>";
 	question.setAttribute('class', 'questions');
 	question.setAttribute('id', 'question_' + id_num);
-	//question.setAttribute('onclick', 'select_sec(this.id)');
 	return question;
 }
 
 
-function selector(id){
+/*function selector(id){
     //curr_selcetion = id;
 	//$('#' + curr_selcetion).css('border','1px solid blue');
 	//alert(id);
 	change_selection(id)
-}
+}*/
 
 function add_section(){
-	//alert("Your adding a section!");
 	tmp_selcetion = 'section_' + sec_count;
 	$('#form_display').append(make_section(sec_count++));
-	//$('#' + curr_selcetion).css('border','1px solid blue');
 	change_selection(tmp_selcetion);
 }
 
 function add_question(){
-	//alert("Your adding a question");
 	$('#' + curr_selcetion).append(make_question(ques_count++));
 
 }
