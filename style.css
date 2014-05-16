@@ -1,0 +1,45 @@
+/*css goes here*/
+
+div{
+   border:1px solid cyan;
+   position:relative;
+   display: inline-block;
+   overflow: auto;
+}
+
+#form_display{
+   width: 70%;
+   height: 90%;
+   float: right;
+   
+}
+
+#form_buttons{
+   width: 20%;
+   height: 90%;
+   float: left;
+}
+
+#cheat_sheet_wrapper{
+	
+
+}
+
+.sections {
+	width: 95%;
+	height: 200px;
+	padding: 10Px;
+	background: #eeeeee;
+	margin-left: auto;
+    margin-right: auto;
+	overflow:hidden;
+
+}
+
+.questions{
+	width: 95%;
+	height: 100px;
+	padding: 10px;
+	background: #cccccc;
+
+}
