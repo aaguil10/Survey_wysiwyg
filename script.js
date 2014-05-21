@@ -4,38 +4,39 @@ var ques_count = 0;
 var curr_selcetion = null;
 
 
+
 function change_selection(new_id){
+	//alert("chanding " + new_id);
 	if(curr_selcetion != null){
 		$('#' + curr_selcetion).css('border','1px solid cyan');
+		//$('#' + curr_selcetion).css('background','#555555');
 	}
 	curr_selcetion = new_id;
 	$('#' + curr_selcetion).css('border','1px solid blue');
 }
 
 function make_section(id_num){
-	var section = document.createElement("div");
-	section.innerHTML = "<h3>Section Name<h3>";
-	section.setAttribute('class', 'sections');
+	var section = document.createElement("ul");
+	section.innerHTML = "<h4>Section Name<h4>";
+	//section.setAttribute('class', 'sections');
 	section.setAttribute('id', 'section_' + id_num);
 	section.setAttribute('onclick', 'change_selection(this.id)');
-	return section;
+	
+	var wrapper = document.createElement("li");
+	wrapper.setAttribute('class', 'sections');
+	$(wrapper).append(section);
+	
+	return wrapper;
 }
 
 function make_question(id_num){
-	var question = document.createElement("div");
-	question.innerHTML = "<h3>Question Name<h3>";
+	var question = document.createElement("li");
+	question.innerHTML = '<h3>Question Name<h3>';
+	question.innerHTML += '<input type="text" name="fname" value="Type question here">';
 	question.setAttribute('class', 'questions');
 	question.setAttribute('id', 'question_' + id_num);
 	return question;
 }
-
-
-/*function selector(id){
-    //curr_selcetion = id;
-	//$('#' + curr_selcetion).css('border','1px solid blue');
-	//alert(id);
-	change_selection(id)
-}*/
 
 function add_section(){
 	tmp_selcetion = 'section_' + sec_count;
@@ -45,5 +46,10 @@ function add_section(){
 
 function add_question(){
 	$('#' + curr_selcetion).append(make_question(ques_count++));
+
+}
+
+function submit_q(q){
+	alert(q);
 
 }

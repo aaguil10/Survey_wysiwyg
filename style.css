@@ -7,11 +7,22 @@ div{
    overflow: auto;
 }
 
+ul{
+   position:relative;
+   overflow: auto;
+}
+
+li{
+	list-style-type: none;
+
+}
+
 #form_display{
    width: 70%;
    height: 90%;
    float: right;
    padding: 10Px;
+   display: inline-block;
    
 }
 
@@ -42,5 +53,6 @@ div{
 	/*height: 100px;*/
 	padding: 10px;
 	background: #cccccc;
+	margin: 10px;
 
 }
