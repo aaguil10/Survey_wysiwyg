@@ -1,20 +1,20 @@
-/* your Javascript goes here */
+
+//global variables for selectors
 var sec_count = 0;
 var ques_count = 0;
 var curr_selcetion = null;
 
-
-
+//Responsible for changing which section is selected.
 function change_selection(new_id){
-	//alert("chanding " + new_id);
 	if(curr_selcetion != null){
 		$('#' + curr_selcetion).css('border','1px solid cyan');
-		//$('#' + curr_selcetion).css('background','#555555');
 	}
 	curr_selcetion = new_id;
 	$('#' + curr_selcetion).css('border','1px solid blue');
 }
 
+
+//creates new empty section
 function make_section(id_num){
 	var section = document.createElement("ul");
 	section.innerHTML = "<h4>Section Name<h4>";
@@ -29,6 +29,7 @@ function make_section(id_num){
 	return wrapper;
 }
 
+//creates a question box
 function make_question(id_num){
 	var question = document.createElement("li");
 	question.innerHTML = '<h3>Question Name<h3>';
@@ -38,6 +39,8 @@ function make_question(id_num){
 	return question;
 }
 
+
+//code to and sections and questions
 function add_section(){
 	tmp_selcetion = 'section_' + sec_count;
 	$('#form_display').append(make_section(sec_count++));
@@ -49,7 +52,7 @@ function add_question(){
 
 }
 
-function submit_q(q){
-	alert(q);
 
-}
+
+
+
