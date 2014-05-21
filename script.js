@@ -22,6 +22,13 @@ function Survey(){
 	this.slot_finder = [];
 }
 
+Survey.prototype.editquestion = function (sec_id, q_id, new_val) {
+  var sec_slot = mySurvey.slot_finder[sec_id];
+  var q_slot = mySurvey.s[sec_slot].slot_finder[q_id];
+  this.s[sec_slot].q[q_slot].id = new_val;
+  //alert("value changed to " + mySurvey.s[sec_slot].q[q_slot].val);
+};
+
 
 var mySurvey = new Survey();
 
@@ -45,7 +52,7 @@ function change_selection(new_id){
 			var arr = $('#' + new_id).sortable('toArray');
 			var sec_slot = mySurvey.slot_finder[curr_selcetion];
 			mySurvey.s[sec_slot].q = update_ques_order(arr, curr_selcetion);
-			alert(mySurvey.s[sec_slot].q[0].id);
+			alert(mySurvey.s[sec_slot].q[0].val);
 			//var clill = $('#' + arr[1]).children('input').val();
 			//alert(clill);
 		}
@@ -61,7 +68,7 @@ function update_ques_order(array, sec_id){
 	//mySurvey.s[0].q[0].val
 	var sec_slot = mySurvey.slot_finder[sec_id];
 	
-	alert("Section: " + sec_id);// mySurvey.s[sec_id].id);// + " Question: " + mySurvey.s[sec_id].q[0].id);
+	//alert("Section: " + sec_id);// mySurvey.s[sec_id].id);// + " Question: " + mySurvey.s[sec_id].q[0].id);
 	while(i <= array.length){
 		
 		var oldSlot = mySurvey.s[sec_slot].slot_finder[array[i]];
@@ -76,7 +83,7 @@ function update_ques_order(array, sec_id){
 //creates new empty section
 function make_section(id_num){
 	var section = document.createElement("ul");
-	section.innerHTML = "<h4>Section Name<h4>";
+	//section.innerHTML = "<h4>Section Name<h4>";
 	section.setAttribute('class', 'sections');
 	section.setAttribute('id', 'section_' + id_num);
 	section.setAttribute('onclick', 'change_selection(this.id)');
@@ -85,6 +92,7 @@ function make_section(id_num){
 	//enables the sections to be sortable 
 	var wrapper = document.createElement("li");
 	wrapper.setAttribute('class', 'form_sections');
+	wrapper.innerHTML = "<h4>Section Name<h4>";
 	$(wrapper).append(section);
 	
 	//Creates Section object and adds it to Survey Object
@@ -121,14 +129,24 @@ function add_section(){
 
 function add_question(){
 	$('#' + curr_selcetion).append(make_question(ques_count++, curr_selcetion, mySurvey.slot_finder[curr_selcetion]));
-
+	
+	$( "input" ).keypress(function() {
+		var value = $( this ).val();
+		mySurvey.editquestion(curr_selcetion, 'question_' + (ques_count-1), value);
+		//alert("New value is: " + value);
+	});
 }
 
 
 $(function() {
 	$('#form_display').sortable();
 	$('#form_display').disableSelection();
+	
 
+});
+
+$( ".section" ).focus(function() {
+  alert( "A section is in focus" );
 });
 
 
