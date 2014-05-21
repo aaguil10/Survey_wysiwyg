@@ -49,6 +49,11 @@ li{
 
 }
 
+.form_sections{
+	width: 95%;
+
+}
+
 .questions{
 	width: 90%;
 	/*height: 100px;*/

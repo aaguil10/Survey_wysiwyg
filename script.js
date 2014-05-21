@@ -11,6 +11,9 @@ function change_selection(new_id){
 	}
 	curr_selcetion = new_id;
 	$('#' + curr_selcetion).css('border','1px solid blue');
+	
+	$('#' + new_id).sortable();
+	$('#' + new_id).disableSelection();
 }
 
 
@@ -18,12 +21,13 @@ function change_selection(new_id){
 function make_section(id_num){
 	var section = document.createElement("ul");
 	section.innerHTML = "<h4>Section Name<h4>";
-	//section.setAttribute('class', 'sections');
+	section.setAttribute('class', 'sections');
 	section.setAttribute('id', 'section_' + id_num);
 	section.setAttribute('onclick', 'change_selection(this.id)');
 	
 	var wrapper = document.createElement("li");
-	wrapper.setAttribute('class', 'sections');
+	//wrapper.innerHTML = "<h4>Section Name<h4>";
+	wrapper.setAttribute('class', 'form_sections');
 	$(wrapper).append(section);
 	
 	return wrapper;
@@ -53,6 +57,13 @@ function add_question(){
 }
 
 
+$(function() {
+	$('#form_display').sortable();
+	$('#form_display').disableSelection();
+
+	//$('.sections').sortable();
+	//$('.sections').disableSelection();
+});
 
 
 
