@@ -19,14 +19,14 @@ function Section(id,slot){
 	this.slot_finder = [];	//used as a hash to find slot value of a question from id
 }
 
-
+//creates Question objects and html for questions
 Section.prototype.makeQuestion = function (q_id) {
 	this.q[this.count] = new Question("question_" + q_id, "Type question here", this.count);
 	this.slot_finder["question_" + q_id] = this.count;
 
 	var question = document.createElement("li");
 	question.innerHTML = '<h3>Question Name<h3>';
-	question.innerHTML += '<input type="text" name="fname" value="Type question here">';
+	question.innerHTML += '<input type="text" name="fname" class="inputs" id="in_' + q_id + '" value="Type question here">';
 	question.setAttribute('class', 'questions');
 	question.setAttribute('id', 'question_' + q_id);
 	$('#' + this.id).append(question);
@@ -35,7 +35,7 @@ Section.prototype.makeQuestion = function (q_id) {
 
 }
 
-
+//Updates Question array in question object
 Section.prototype.UpdateQuesOrder = function (array) {
 	var tmp = [];
 	for(var i = 0; i < this.q.length; i++){
@@ -135,6 +135,22 @@ function add_question(){
 	var sec_id = 'section_' + str[1];
 	var sec_slot = my_survey.slot_finder[sec_id];
 	my_survey.s[sec_slot].makeQuestion(question_count++);
+	
+	$( ".inputs" ).change(function() {
+		var str  = curr_selcetion.split("_");
+		var sec_id = 'section_' + str[1];
+		var sec_slot = my_survey.slot_finder[sec_id];
+	
+	
+		var value = $( this ).val();
+		//console.log("value: " + value);
+		var st  = this.id.split("_");
+		var ques_id = 'question_' + st[1];
+		var ques_slot = my_survey.s[sec_slot].slot_finder[ques_id];
+		my_survey.s[sec_slot].q[ques_slot].val = value;
+		console.log("value: " + my_survey.s[sec_slot].q[ques_slot].val);
+		
+	});
 }
 
 //Changes the section selected and makes border blue
