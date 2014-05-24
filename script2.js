@@ -1,5 +1,6 @@
 var survey_count = 0;
 var my_survey = null;
+var curr_selcetion = null;
 
 //question object
 function Question(id,val,slot) {
@@ -60,17 +61,18 @@ Survey.prototype.makeSection = function (id_num) {
 	var section = document.createElement("ul");
 	section.setAttribute('class', 'sections');
 	section.setAttribute('id', 'section_' + id_num);
-	section.setAttribute('onclick', 'change_selection(this.id)');
 	
 	//essentially <li><ul>...Ques...</ul></li>  the "li" is part of a bigger list that 
 	//enables the sections to be sortable 
 	var wrapper = document.createElement("li");
 	wrapper.setAttribute('class', 'form_sections');
 	wrapper.setAttribute('id', 'secList_' + id_num);
+	wrapper.setAttribute('onclick', 'change_selection(this.id)');
 	wrapper.innerHTML = "<h4>Section Name<h4>";
 	$(wrapper).append(section);
 	$('#' + this.id).append(wrapper);
 	console.log('created ' + this.s[this.count].id);
+	change_selection('secList_' + id_num)
 	
 	this.count++;
 };
@@ -90,11 +92,30 @@ $( document ).ready(function() {
 });
 
 
-
 function add_section(){
 	my_survey.makeSection(my_survey.count);
+	//change_selection(my_survey.s[my_survey.count-1].id)
+
 }
 
+
+function change_selection(S_id){
+	var str  = S_id.split("_");
+	var sec_id = 'section_' + str[1];
+	console.log("sec_id: " + sec_id);
+	if(curr_selcetion != null){
+		//var old_str = curr_selcetion.split("_");
+		//var old_sec = 'secList_' + str[1];
+		console.log("S_id: " + S_id);
+		$('#' + curr_selcetion).css('border','none');
+	}
+	console.log("curr_selcetion: " + curr_selcetion);
+	curr_selcetion = S_id;
+	console.log("curr_selcetion: " + curr_selcetion);
+	$('#' + S_id).css('border','1px solid cyan');
+		
+
+}
 
 function printA(array){
 	var str = "";
