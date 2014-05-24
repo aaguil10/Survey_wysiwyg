@@ -28,7 +28,7 @@ function Survey(sur_id,inbed_id){
 	console.log("made survey!");
 }
 
-
+//creates list
 function buildSurvey(sur_id){
 	var survey = document.createElement("ul");
 	//survey.innerHTML = '<h3>my survey<h3>';
@@ -38,24 +38,20 @@ function buildSurvey(sur_id){
 
 }
 
+//Updates order of Sections in our Object Survey when it's sorted
 Survey.prototype.UpdateSecOrder = function (array) {
 	var tmp = [];
-	//var str  = array[0].split("_");
-	
-
 	for(var i = 0; i < this.s.length; i++){
 		var str  = array[i].split("_");
-		var sec_id = 'section_' + str[1];
+		var sec_id = 'section_' + str[1];	//convert secList_0 to section_0
 		var sec_slot = this.slot_finder[sec_id];
 		tmp[i] = this.s[sec_slot];
-		//console.log("Sec[" + sec_slot + "]: " + this.s[sec_slot]);
-		this.slot_finder[sec_id] = i;
+		this.slot_finder[sec_id] = i;	//update slot_finder for section
 	}
-
-	//console.log(tmp);
 	this.s = tmp;
 }
 
+//Makes Section object and then creates html and inserts it to current survey
 Survey.prototype.makeSection = function (id_num) {
 	this.s[this.count] = new Section('section_' + id_num, this.count);
 	this.slot_finder['section_' + id_num] = this.count;
@@ -81,20 +77,12 @@ Survey.prototype.makeSection = function (id_num) {
 
 
 $( document ).ready(function() {
-    console.log( "ready!" );
 	my_survey = new Survey('survey_' + survey_count++, 'form_display');
-	//my_survey.makeSection('section_' + my_survey.count);
 	$('.surveys').sortable({
-		update: function(event, ui) {
+		update: function(event, ui) {	//updates order of sections
 			var arr = $('.surveys').sortable('toArray');
-			//console.log(arr);
-			//console.log(my_survey.slot_finder['section_' + 0]);
-			my_survey.UpdateSecOrder(arr);
-			//printA(my_survey.s);
-			
-			
+			my_survey.UpdateSecOrder(arr);	
 		}
-	
 	});
 	$('.surveys').disableSelection();	
 
