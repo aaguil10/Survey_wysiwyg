@@ -56,6 +56,8 @@ li{
 	margin-left: auto;
     margin-right: auto;
 	overflow:hidden;
+	margin: 5px;
+	border-radius:25px;
 
 }
 

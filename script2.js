@@ -94,28 +94,20 @@ $( document ).ready(function() {
 
 function add_section(){
 	my_survey.makeSection(my_survey.count);
-	//change_selection(my_survey.s[my_survey.count-1].id)
-
 }
 
-
+//Changes the section selected and makes border blue
 function change_selection(S_id){
 	var str  = S_id.split("_");
 	var sec_id = 'section_' + str[1];
-	console.log("sec_id: " + sec_id);
 	if(curr_selcetion != null){
-		//var old_str = curr_selcetion.split("_");
-		//var old_sec = 'secList_' + str[1];
-		console.log("S_id: " + S_id);
 		$('#' + curr_selcetion).css('border','none');
 	}
-	console.log("curr_selcetion: " + curr_selcetion);
 	curr_selcetion = S_id;
-	console.log("curr_selcetion: " + curr_selcetion);
 	$('#' + S_id).css('border','1px solid cyan');
-		
-
 }
+
+
 
 function printA(array){
 	var str = "";
