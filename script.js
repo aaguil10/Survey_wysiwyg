@@ -73,8 +73,9 @@ function update_ques_order(array, sec_id){
 		
 		var oldSlot = mySurvey.s[sec_slot].slot_finder[array[i]];
 		newOrder[j++] = mySurvey.s[sec_slot].q[oldSlot];
+		alert("Q: " + mySurvey.s[sec_slot].q[oldSlot].val);
 		//newOrder[j-1].val = j-1;
-		//alert("Q: " + newOrder[0].val);
+		//alert("Q: " + newOrder[j-1].val);
 	i++;
 	}
 	return newOrder;
