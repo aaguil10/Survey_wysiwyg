@@ -39,15 +39,11 @@ Section.prototype.makeQuestion = function (q_id) {
 Section.prototype.UpdateQuesOrder = function (array) {
 	var tmp = [];
 	for(var i = 0; i < this.q.length; i++){
-		console.log("array[i]: " + array[i]);
-		//var str  = array[i].split("_");
-		//var sec_id = 'section_' + str[1];	//convert secList_0 to section_0
 		var sec_slot = this.slot_finder[array[i]];
 		tmp[i] = this.q[sec_slot];
-		this.slot_finder[array[i]] = i;	//update slot_finder for section
+		this.slot_finder[array[i]] = i;	//update slot_finder for Question
 	}
 	this.q = tmp;
-
 }
 
 //Survey object stores an array of sections
@@ -87,7 +83,6 @@ Survey.prototype.UpdateSecOrder = function (array) {
 Survey.prototype.makeSection = function (id_num) {
 	this.s[this.count] = new Section('section_' + id_num, this.count);
 	this.slot_finder['section_' + id_num] = this.count;
-	//console.log('Put section_'+ id_num + ' in slot ' + this.slot_finder['section_' + id_num]);
 
 	var section = document.createElement("ul");
 	section.setAttribute('class', 'sections');
@@ -129,8 +124,6 @@ function add_section(){
 		update: function(event, ui) {	//updates order of sections
 			var arr = $('#'+ this.id).sortable('toArray');
 			var sec_slot = my_survey.slot_finder[this.id];
-			//console.log("this.id: " + this.id);
-			console.log("arr: " + arr);
 			my_survey.s[sec_slot].UpdateQuesOrder(arr);	
 		}
 	});
