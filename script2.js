@@ -137,19 +137,18 @@ function add_question(){
 	my_survey.s[sec_slot].makeQuestion(question_count++);
 	
 	$( ".inputs" ).change(function() {
+		//find current section
 		var str  = curr_selcetion.split("_");
 		var sec_id = 'section_' + str[1];
 		var sec_slot = my_survey.slot_finder[sec_id];
-	
-	
+		//get value that was changed
 		var value = $( this ).val();
-		//console.log("value: " + value);
+		//find question
 		var st  = this.id.split("_");
 		var ques_id = 'question_' + st[1];
 		var ques_slot = my_survey.s[sec_slot].slot_finder[ques_id];
 		my_survey.s[sec_slot].q[ques_slot].val = value;
-		console.log("value: " + my_survey.s[sec_slot].q[ques_slot].val);
-		
+		console.log("value changed to " + my_survey.s[sec_slot].q[ques_slot].val);
 	});
 }
 
