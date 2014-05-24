@@ -18,6 +18,10 @@ li{
 
 }
 
+input{
+	border-radius:5px;
+}
+
 #form_display{
    width: 70%;
    height: 82%;
@@ -67,5 +71,5 @@ li{
 	padding: 10px;
 	background: #cccccc;
 	margin: 10px;
-
+	border-radius:20px;
 }

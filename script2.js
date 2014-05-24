@@ -1,6 +1,7 @@
 var survey_count = 0;
 var my_survey = null;
 var curr_selcetion = null;
+var question_count = 0;
 
 //question object
 function Question(id,val,slot) {
@@ -18,6 +19,36 @@ function Section(id,slot){
 	this.slot_finder = [];	//used as a hash to find slot value of a question from id
 }
 
+
+Section.prototype.makeQuestion = function (q_id) {
+	this.q[this.count] = new Question("question_" + q_id, "Type question here", this.count);
+	this.slot_finder["question_" + q_id] = this.count;
+
+	var question = document.createElement("li");
+	question.innerHTML = '<h3>Question Name<h3>';
+	question.innerHTML += '<input type="text" name="fname" value="Type question here">';
+	question.setAttribute('class', 'questions');
+	question.setAttribute('id', 'question_' + q_id);
+	$('#' + this.id).append(question);
+	console.log('created ' + this.q[this.count].id);
+	this.count++;
+
+}
+
+
+Section.prototype.UpdateQuesOrder = function (array) {
+	var tmp = [];
+	for(var i = 0; i < this.q.length; i++){
+		console.log("array[i]: " + array[i]);
+		//var str  = array[i].split("_");
+		//var sec_id = 'section_' + str[1];	//convert secList_0 to section_0
+		var sec_slot = this.slot_finder[array[i]];
+		tmp[i] = this.q[sec_slot];
+		this.slot_finder[array[i]] = i;	//update slot_finder for section
+	}
+	this.q = tmp;
+
+}
 
 //Survey object stores an array of sections
 function Survey(sur_id,inbed_id){
@@ -94,6 +125,23 @@ $( document ).ready(function() {
 
 function add_section(){
 	my_survey.makeSection(my_survey.count);
+		$('.sections').sortable({
+		update: function(event, ui) {	//updates order of sections
+			var arr = $('#'+ this.id).sortable('toArray');
+			var sec_slot = my_survey.slot_finder[this.id];
+			//console.log("this.id: " + this.id);
+			console.log("arr: " + arr);
+			my_survey.s[sec_slot].UpdateQuesOrder(arr);	
+		}
+	});
+	$('.sections').disableSelection();	
+}
+
+function add_question(){
+	var str  = curr_selcetion.split("_");
+	var sec_id = 'section_' + str[1];
+	var sec_slot = my_survey.slot_finder[sec_id];
+	my_survey.s[sec_slot].makeQuestion(question_count++);
 }
 
 //Changes the section selected and makes border blue
@@ -118,6 +166,9 @@ function printA(array){
 }
 
 function debug(){
-	printA(my_survey.s);
+	var str  = curr_selcetion.split("_");
+	var sec_id = 'section_' + str[1];
+	var sec_slot = my_survey.slot_finder[sec_id];
+	printA(my_survey.s[sec_slot].q);
 
 }
